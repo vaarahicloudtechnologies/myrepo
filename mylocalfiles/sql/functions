@@ -1,0 +1,189 @@
+#date functions#
+use gcp11;
+#date functions
+select curdate(),current_date(),CURRENT_TIME(),current_timestamp();
+
+#select * from sales where date(trans_date) between current_date()-1 day and current_date()
+
+select current_timestamp(),(current_timestamp());
+
+# find all the proudcts which are sold in 2023
+select year(current_timestamp()),
+month(current_date()),day(current_timestamp()),
+hour(current_timestamp()),minute(current_timestamp()),second(current_timestamp())
+;
+#select * from sales where year(trns_date) between year(current_date())-3 and year(current_date())
+
+# find all the emplyees and their exp
+
+select *,((yr*12)+mnth)/12 from
+(select empno,ename,hiredate,current_date() as cur_date,
+(current_date()-hiredate) as exp,
+year(curdate())-year(hiredate) as yr,
+month(current_date())-month(hiredate) as mnth from empy)a;
+#day(current_date())-day(hiredate) as dy
+# from empy;
+
+#select ename,(current_date()-hiredate)/365 from empy;
+
+# date_add,adddate,date_sub or subdate
+# date_add : add specific days,months or years to date field
+select current_date(),date_add(current_date(),interval -10 day)
+,date_add(current_date(),interval -10 month),
+date_add(current_date(),interval -10 year);
+
+
+# get all the employees who joined in 2020
+# who joined in last 10 days, last one month,
+
+insert into empy(empno,ename,hiredate) values (11,"abc","2024-07-01");
+select * from empy where hiredate
+ between date_sub(current_date(), interval 10 day) and current_date();
+ 
+ # extract()
+ 
+ select current_timestamp(),
+ extract(year from current_timestamp()),
+ extract(month from current_timestamp());
+ 
+ #str_to_date
+ 
+create table orders(oid int,order_date date);
+
+insert into orders values(2,"2nd July 2024");
+
+#str_to_date => input string ,format
+select "2nd July 2024" as str_dt,
+str_to_date("2nd July 2024",'%D %M %Y');  # yyyy-mm-dd
+ 
+select "02/07/2024" as str_dt,
+str_to_date("02/07/2024",'%d/%m/%Y') 
+
+show tables;
+
+create table orders1 as select * from orders where 1=2;
+
+desc orders1;
+alter table orders1 modify order_date varchar(20);
+select * from orders1;
+insert into orders1 values(1,"2nd July 2024"),(2,"1st Feb 2023");
+
+# loading the data from one table to another table
+
+desc orders;
+select * from orders;
+insert into orders  
+select oid, str_to_date(order_date,'%D %M %Y') from orders1;
+
+# This file having all the customers who ordered on 2nd July 2024 / 2024/07/02
+
+#date_format
+select oid,order_date,date_format(order_date,'%D %M %Y') from orders;
+
+
+
+
+
+
+#questions on date functions#
+Questions on Functions:
+Get the minimum sal and maximum sal from emp table
+Get the min,max,avg sal from emp table
+Get the total records from the emp table
+Get the unique deptartments from emp table
+Get the distinct jobs from emp table
+Get the total employees who are working in 10th and 20th department
+Get the employees who are working in 10th and 30th and sal between 2000 and 5000
+Get the department wise sum salaries and avg salaries and count of the employees
+department wise sum salaries and avg salaries and count of the employees and department wise sum sal should be greater than 10000
+get the department wise total employess and total employee count should be greater than 3
+get the job wise sum salaries
+get the department wise and job wise sum salaries
+I have below input
+Lucky.eturi@gmail.com
+vijay@hotmail.com
+prasanna@yahoo.com
+o/p1: lucky.eturi,Vijay,Prasanna
+o/p2: gmail,Hotmail,yahoo
+
+Input:
+Lakshmi eturi
+Prasanna meegada
+Vijay deepuru
+o/p1: Lakshmi,Prasanna,Vijay
+o/p2: eturi,meegada,deepuru
+Find out the position of “hello” form “hello world”?
+How to combine two or more strings into one string
+Input: Lakshmi,eturi o/p: “Lakshmi eturi”
+Table: persons: combine two columns firstName,lastName and create new column FullName
+How to remove spaces before and after the string
+Input: “       Lakshmi        “ o/p: Lakshmi
+Examples for insert and position functions?
+How to find out total length of string ?
+Find the length of the employees name from emp
+Convert all the employees name to lower case or upper case?
+Get first 4 letters or last 4 letters from job in the employee table
+How to get current date?
+How to add 10 days to current date
+How to subtract 10 days to current date
+How to find out the number of days between two dates
+i/p: 2023-05-12
+I want below outputs:
+o/p1: 2023/05/12
+o/p2: 23/05/12
+o/p3: 05th May 2023
+o/p4: 05/06/2023
+o/p5: May 05th’23
+and etc.
+how to get the year and month and day from given date
+i/p: 2023-05-12
+o/p1: only year 2023
+o/p2: only month 05
+o/p3: only day 12
+I have below dates and convert it to yyyy-mm-dd
+i/p1: 2023/05/12
+i/p2: 23/05/12
+i/p3: 05th May 2023
+i/p4: 05/06/2023
+i/p5: May 05th’23
+for all the given inputs, take that as input and process it to 2023-05-12 (yyyy-mm-dd)
+I have two tables.
+Table1 (eno int,hiredate string)
+Data:
+1, 05th May 2023
+I have table2 (eno int,hiredate date)
+
+Load the table1 data into table2 with proper date format for that employee.
+Generate the new column based on below scenario.
+New_col_name: status
+If sal between 3000 and 5000 then higher_sal
+Sal between 1500 and 3000 then medium_sal
+Otherwise low_sal
+
+Display the contents “commission not available” to the all employees where comm is null
+I have table like below
+Name,age
+Lakshmi,34
+Prasanna,25
+Vijay,20
+Mansoor,20
+Sai,15
+Vishanu,14
+Create new column age_group and display values like below.
+If age grate than 30 then adult
+If between 20 and 30 then younger
+Else “childs”
+Add commission as 500 to all the employees who are having null as commission.
+Add commission as 500 to the employees who are having comm is null and 200 the employees whose comm is not null
+Pick the null records from the table who having comm is blank or null or empty
+Difference between COALESCE and ifnull functions with examples?
+I have input below
+Name,date1 (varchar)
+Lakshmi,2017-05-12
+
+Convert above date1 value(which is varchar) to date data type
+Convert int to decimal
+Convert decimal to int
+Difference between cast and convert functions.
+
+
