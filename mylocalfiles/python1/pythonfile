@@ -1,0 +1,144 @@
+#conditional statements#
+Python conditional statements 
+ 
+ 
+--- If Statement
+
+The `if` statement is used to test a specific condition. If the condition is true, the block of code inside the `if` statement is executed.
+
+
+# Example 1: Check if a number is positive
+number = 10
+
+if number > 0:
+    print("The number is positive.")
+
+
+--- If-Else Statement
+
+The `if-else` statement provides an alternative block of code to execute when the condition is false.
+
+
+# Example 2: Check if a number is positive or negative
+number = -5
+
+if number > 0:
+    print("The number is positive.")
+else:
+    print("The number is negative.")
+
+
+--- If-Elif-Else Statement
+
+The `if-elif-else` statement is used to test multiple conditions.
+
+
+# Example 3: Check if a number is positive, negative, or zero
+number = 0
+
+if number > 0:
+    print("The number is positive.")
+elif number < 0:
+    print("The number is negative.")
+else:
+    print("The number is zero.")
+
+
+--- Nested If Statement
+
+An `if` statement can be nested inside another `if` statement.
+
+
+# Example 4: Check if a number is positive and even
+number = 8
+
+if number > 0:
+    if number % 2 == 0:
+        print("The number is positive and even.")
+    else:
+        print("The number is positive but not even.")
+else:
+    print("The number is not positive.")
+
+
+--- Practice Problems
+
+Here are some problems to practice:
+
+1. **Check if a number is even or odd.**
+   
+   number = 7
+   # Write your code here
+   
+
+2. **Check if a person is eligible to vote. (Assume voting age is 18)**
+   
+   age = 20
+   # Write your code here
+   
+
+3. **Check if a year is a leap year.**
+   - A year is a leap year if it is divisible by 4 but not by 100, except if it is also divisible by 400.
+   
+   year = 2024
+   # Write your code here
+   
+
+4. **Check the grade of a student based on marks.**
+   - A: 90-100
+   - B: 80-89
+   - C: 70-79
+   - D: 60-69
+   - F: <60
+   
+   marks = 85
+   # Write your code here
+   
+
+--- Solutions
+
+1. **Check if a number is even or odd:**
+   
+   number = 7
+
+   if number % 2 == 0:
+       print("The number is even.")
+   else:
+       print("The number is odd.")
+   
+
+2. **Check if a person is eligible to vote:**
+   
+   age = 20
+
+   if age >= 18:
+       print("Eligible to vote.")
+   else:
+       print("Not eligible to vote.")
+   
+
+3. **Check if a year is a leap year:**
+   
+   year = 2024
+
+   if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+       print(f"{year} is a leap year.")
+   else:
+       print(f"{year} is not a leap year.")
+   
+
+4. **Check the grade of a student based on marks:**
+   
+   marks = 85
+
+   if 90 <= marks <= 100:
+       print("Grade: A")
+   elif 80 <= marks < 90:
+       print("Grade: B")
+   elif 70 <= marks < 80:
+       print("Grade: C")
+   elif 60 <= marks < 70:
+       print("Grade: D")
+   else:
+       print("Grade: F")
+   
